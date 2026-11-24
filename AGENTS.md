@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Editable site content lives in src/data/site.ts and src/data/journals.ts; components read from there so content edits never touch UI code.
+- No backend or on-site data forms: sign-ups go to an external newsletter link, purchases to external store links.
