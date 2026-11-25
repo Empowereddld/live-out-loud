@@ -28,6 +28,16 @@ describe("Journal cards", () => {
     );
   });
 
+  it("shows the Speak Life cover whole, with its own alt text and store link", () => {
+    const book = journals.find((j) => j.id === "speak-life");
+
+    expect(book?.cover).toMatch(/speak-life-journal-cover\.png$/);
+    expect(book?.alt).toBe("Speak Life daily affirmation journal cover.");
+    expect(book?.fit).toBe("contain");
+    expect(book?.ratio).toBe("1023/1537");
+    expect(book?.amazonUrl).toBe("https://www.amazon.ca/dp/B0H6STHNWP");
+  });
+
   it("shows the War Room Ready cover whole, with its own alt text and store link", () => {
     const book = journals.find((j) => j.id === "war-room-ready");
 

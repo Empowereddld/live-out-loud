@@ -28,6 +28,8 @@ export const journals: Journal[] = [
     amazonUrl: "https://www.amazon.ca/dp/B0H6STHNWP",
     cover: speakLifeCover.url,
     alt: "Speak Life daily affirmation journal cover.",
+    fit: "contain",
+    ratio: "1023/1537",
   },
   {
     id: "war-room-ready",
