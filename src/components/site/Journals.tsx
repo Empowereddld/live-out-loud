@@ -69,8 +69,8 @@ const Journals = () => {
                 key={book.id}
                 initial={{ opacity: 0, y: 40, rotate: i % 2 ? 3 : -3 }}
                 whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.9, ease, delay: 0.1 * i }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.6, ease, delay: 0.06 * i }}
                 whileHover={{ y: -10, rotate: i % 2 ? 1.5 : -1.5 }}
                 whileTap={{ y: -6, scale: 0.98, rotate: i % 2 ? 1 : -1 }}
               >

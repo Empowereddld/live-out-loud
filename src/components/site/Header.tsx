@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 import Wordmark from "./Wordmark";
-import { ease } from "./Reveal";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -16,12 +14,9 @@ const Header = () => {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease }}
+    <header
       className={cn(
-        "sticky top-0 z-40 transition-all duration-500",
+        "enter-drop sticky top-0 z-40 transition-all duration-500",
         scrolled
           ? "border-b border-navy/10 bg-cream/80 shadow-[0_10px_30px_-20px_rgba(43,58,87,0.35)] backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
@@ -52,7 +47,7 @@ const Header = () => {
           {site.nav[0]?.label}
         </a>
       </div>
-    </motion.header>
+    </header>
   );
 };
 

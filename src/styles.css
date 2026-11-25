@@ -312,6 +312,85 @@
   }
 }
 
+/* Hero entrance: CSS so it plays on first paint, before JavaScript loads */
+@keyframes enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes enter-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes enter-curtain {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes enter-zoom {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes enter-arch {
+  from {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(16px, 16px);
+  }
+}
+@keyframes enter-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-30deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer components {
+  .enter-rise {
+    animation: enter-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .enter-drop {
+    animation: enter-drop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .enter-curtain {
+    animation: enter-curtain 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .enter-zoom {
+    animation: enter-zoom 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .enter-arch {
+    animation: enter-arch 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .enter-pop {
+    animation: enter-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
