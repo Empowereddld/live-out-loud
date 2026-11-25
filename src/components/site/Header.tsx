@@ -1,47 +1,59 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
-import { navLinks, siteConfig } from "@/data/site";
-import { CTAButton, Logo } from "./ui";
+import Wordmark from "./Wordmark";
+import { ease } from "./Reveal";
 
-export function Header() {
+const Header = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
+
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 20);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
   return (
-    <>
-    <header className={cn("sticky top-0 z-40 border-b border-transparent bg-background/95 backdrop-blur transition-all", scrolled ? "border-border py-2" : "py-4")}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5">
-        <a href="#gift" aria-label="Live Out Loud home"><Logo /></a>
-        <nav aria-label="Main" className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-navy hover:text-rose">{l.label}</a>
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease }}
+      className={cn(
+        "sticky top-0 z-40 transition-all duration-500",
+        scrolled
+          ? "border-b border-navy/10 bg-cream/80 shadow-[0_10px_30px_-20px_rgba(43,58,87,0.35)] backdrop-blur-md"
+          : "border-b border-transparent bg-transparent",
+      )}
+    >
+      <div
+        className={cn(
+          "container flex items-center justify-between transition-all duration-500",
+          scrolled ? "h-16" : "h-20",
+        )}
+      >
+        <Wordmark className={cn("transition-all duration-500", scrolled ? "size-12" : "size-16")} />
+        <nav className="hidden gap-9 text-[13px] font-medium tracking-wide text-navy/75 md:flex">
+          {site.nav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="link-underline transition-colors hover:text-navy"
+            >
+              {item.label}
+            </a>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
-          <CTAButton href={siteConfig.signupUrl} external className="px-4 text-xs sm:px-6 sm:text-sm">Get my free gift</CTAButton>
-          <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" className="inline-flex size-11 items-center justify-center rounded-full text-navy lg:hidden focus-visible:ring-2 focus-visible:ring-ring">
-            <Menu />
-          </button>
-        </div>
+        <a
+          href="#free-gift"
+          className="btn-sheen inline-flex min-h-10 items-center rounded-full bg-rose px-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-white transition-colors hover:bg-rose-dark md:hidden"
+        >
+          {site.nav[0]?.label}
+        </a>
       </div>
-    </header>
-      <div className={cn("fixed inset-0 z-50 lg:hidden", open ? "" : "pointer-events-none")} aria-hidden={!open}>
-        <div className={cn("absolute inset-0 bg-navy/40 transition-opacity", open ? "opacity-100" : "opacity-0")} onClick={() => setOpen(false)} />
-        <nav aria-label="Mobile" className={cn("absolute right-0 top-0 flex h-full w-72 flex-col gap-2 bg-background p-6 shadow-soft transition-transform", open ? "translate-x-0" : "translate-x-full")}>
-          <button type="button" onClick={() => setOpen(false)} aria-label="Close menu" tabIndex={open ? 0 : -1} className="mb-4 inline-flex size-11 items-center justify-center self-end rounded-full text-navy">
-            <X />
-          </button>
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} tabIndex={open ? 0 : -1} onClick={() => setOpen(false)} className="py-3 font-display text-2xl text-navy hover:text-rose">{l.label}</a>
-          ))}
-        </nav>
-      </div>
-    </>
+    </motion.header>
   );
-}
+};
+
+export default Header;

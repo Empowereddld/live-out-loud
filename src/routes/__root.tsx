@@ -18,7 +18,9 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-rose">404</p>
-        <h1 className="mt-4 font-display text-4xl text-navy">This page is still <em className="italic text-rose">dormant.</em></h1>
+        <h1 className="mt-4 font-display text-4xl text-navy">
+          This page is still <em className="italic text-rose">dormant.</em>
+        </h1>
         <p className="mt-3 text-navy">Let's wake something else up.</p>
         <div className="mt-6">
           <Link
@@ -81,10 +83,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Live Out Loud" },
       { property: "og:site_name", content: "Live Out Loud" },
-      { name: "description", content: "Faith-driven journals, speaking and life coaching by Kalenéa Johnson." },
+      {
+        name: "description",
+        content: "Speak life over yourself. Step into who God made you to be.",
+      },
       { name: "author", content: "Kalenéa Johnson" },
       { property: "og:title", content: "Live Out Loud" },
-      { property: "og:description", content: "Faith-driven journals, speaking and life coaching by Kalenéa Johnson." },
+      {
+        property: "og:description",
+        content: "Speak life over yourself. Step into who God made you to be.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -93,8 +101,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600&display=swap" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap",
+      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],
   }),
   shellComponent: RootShell,

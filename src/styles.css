@@ -41,6 +41,14 @@
   --color-cream: var(--cream);
   --color-pale-moss: var(--pale-moss);
   --color-tan: var(--tan);
+  --color-sage: var(--sage);
+  --color-moss-dark: var(--moss-dark);
+  --color-rose-dark: var(--rose-dark);
+  --color-gold-deep: var(--gold-deep);
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-spin-slow: spin-slow 22s linear infinite;
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-drift-slow: drift 26s ease-in-out infinite reverse;
   --shadow-soft: 0 10px 30px -12px color-mix(in oklab, var(--navy) 25%, transparent);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -86,16 +94,21 @@
 
 :root {
   --radius: 1rem;
-  --navy: oklch(0.352 0.056 262);
-  --moss: oklch(0.523 0.06 128);
-  --rose: oklch(0.525 0.087 357);
-  --gold: oklch(0.72 0.11 85);
-  --soft-rose: oklch(0.928 0.022 355);
+  /* Kalenéa's palette: moss #5F7350, navy #2B3A57, dusty rose #9E5A6E, soft rose #F3E4E8, cream #F7F4EC, gold #C6A048 */
+  --navy: oklch(0.349 0.055 262.9);
+  --moss: oklch(0.529 0.058 132.3);
+  --moss-dark: oklch(0.456 0.05 132.8);
+  --rose: oklch(0.551 0.092 1.7);
+  --rose-dark: oklch(0.488 0.085 1.8);
+  --gold: oklch(0.723 0.115 85.7);
+  --gold-deep: oklch(0.554 0.092 79.8);
+  --soft-rose: oklch(0.932 0.017 359.3);
+  --sage: oklch(0.926 0.016 130.4);
   --peach: oklch(0.928 0.03 55);
-  --cream: oklch(0.959 0.022 70);
+  --cream: oklch(0.967 0.011 89.7);
   --pale-moss: oklch(0.95 0.013 125);
   --tan: oklch(0.643 0.08 60);
-  --background: oklch(1 0 0);
+  --background: var(--cream);
   --foreground: var(--navy);
   --card: oklch(1 0 0);
   --card-foreground: var(--navy);
@@ -162,16 +175,150 @@
   }
 }
 
-@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: 1.5rem;
+}
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-sans); }
-  a { color: inherit; }
-  .fade-up { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-  .fade-up.is-visible { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .fade-up { opacity: 1; transform: none; transition: none; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  a {
+    color: inherit;
+  }
+  ::selection {
+    background: var(--soft-rose);
+    color: var(--navy);
+  }
+  :focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* small uppercase label above headings */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+  }
+
+  /* nav links: gold underline grows from the left on hover */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* soft light sweep across buttons on hover, and on tap on phones */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .btn-sheen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      110deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-sheen:hover::before,
+  .btn-sheen:active::before {
+    transform: translateX(120%);
+  }
+
+  /* subtle paper grain over the whole page */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* linen texture on journal covers */
+  .journal-cover {
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px 4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
