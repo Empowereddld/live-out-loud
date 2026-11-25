@@ -1,4 +1,5 @@
 import speakLifeCover from "@/assets/speak-life-journal-cover.png.asset.json";
+import warRoomCover from "@/assets/war-room-ready-journal-cover.png.asset.json";
 
 export type Journal = {
   id: string;
@@ -24,7 +25,8 @@ export const journals: Journal[] = [
     id: "war-room-ready",
     title: "War Room Ready",
     amazonUrl: "https://www.amazon.ca/dp/B0H6T5CLQQ",
-    cover: "",
+    cover: warRoomCover.url,
+    alt: "War Room Ready 52-week guided prayer journal cover.",
   },
   {
     id: "dream-loud",
