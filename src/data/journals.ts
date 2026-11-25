@@ -1,4 +1,13 @@
-export type Journal = { id: string; title: string; amazonUrl: string; cover: string };
+import speakLifeCover from "@/assets/speak-life-journal-cover.png.asset.json";
+
+export type Journal = {
+  id: string;
+  title: string;
+  amazonUrl: string;
+  cover: string;
+  // Alt text for the cover image; falls back to the title when empty.
+  alt?: string;
+};
 
 // The journals shown as book covers in "The Journals" section, in order.
 // amazonUrl: optional link for that cover (leave "" for no link).
@@ -8,7 +17,8 @@ export const journals: Journal[] = [
     id: "speak-life",
     title: "Speak Life",
     amazonUrl: "https://www.amazon.ca/dp/B0H6STHNWP",
-    cover: "",
+    cover: speakLifeCover.url,
+    alt: "Speak Life daily affirmation journal cover.",
   },
   {
     id: "war-room-ready",

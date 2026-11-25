@@ -43,7 +43,7 @@ const Journals = () => {
             const inner = book.cover ? (
               <img
                 src={book.cover}
-                alt={book.title}
+                alt={book.alt || book.title}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
               />
