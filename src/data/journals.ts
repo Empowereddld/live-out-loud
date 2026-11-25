@@ -43,7 +43,8 @@ export const journals: Journal[] = [
   {
     id: "brave-and-beloved",
     title: "Brave & Beloved",
-    amazonUrl: "" /* PLACEHOLDER: add Amazon link */,
+    amazonUrl:
+      "https://www.amazon.ca/Brave-Beloved-Confidence-Emotional-Scripture/dp/B0H78C69DN",
     cover: braveAndBelovedCover.url,
     alt: "Brave & Beloved faith journal for teen girls cover.",
     fit: "contain",

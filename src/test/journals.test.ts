@@ -4,13 +4,15 @@ import { journals } from "@/data/journals";
 
 // Content rules the site must keep: covers, alt text and store links per card.
 describe("Journal cards", () => {
-  it("shows the Brave & Beloved cover whole, with its own alt text and no store link yet", () => {
+  it("shows the Brave & Beloved cover whole, with its own alt text and store link", () => {
     const book = journals.find((j) => j.id === "brave-and-beloved");
 
     expect(book?.cover).toMatch(/brave-and-beloved-journal-cover\.png$/);
     expect(book?.alt).toBe("Brave & Beloved faith journal for teen girls cover.");
     expect(book?.fit).toBe("contain");
-    expect(book?.amazonUrl).toBe("");
+    expect(book?.amazonUrl).toBe(
+      "https://www.amazon.ca/Brave-Beloved-Confidence-Emotional-Scripture/dp/B0H78C69DN",
+    );
   });
 
   it("keeps the Amazon links already published", () => {
