@@ -67,8 +67,9 @@ const Journals = () => {
             // same height as the rest of the row, artwork edge to edge, nothing cropped.
             const whole = book.fit === "contain";
             const cls = `journal-cover relative flex ${
-              whole ? "mx-auto h-full w-auto aspect-[2/3]" : "aspect-[3/4]"
+              whole ? "mx-auto h-full w-auto" : "aspect-[3/4]"
             } flex-col justify-between overflow-hidden rounded-l-sm rounded-r-xl p-4 shadow-[0_30px_50px_-30px_rgba(43,58,87,0.6)] sm:p-6 ${covers[i % covers.length]}`;
+            const style = whole ? { aspectRatio: book.ratio ?? "2/3" } : undefined;
             const card = book.amazonUrl ? (
               <a
                 href={book.amazonUrl}
@@ -76,11 +77,14 @@ const Journals = () => {
                 rel="noopener noreferrer"
                 aria-label={`${book.title} on Amazon`}
                 className={cls}
+                style={style}
               >
                 {inner}
               </a>
             ) : (
-              <div className={cls}>{inner}</div>
+              <div className={cls} style={style}>
+                {inner}
+              </div>
             );
             return (
               <motion.li

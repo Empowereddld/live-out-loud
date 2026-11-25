@@ -13,6 +13,9 @@ export type Journal = {
   // How the cover fills the card: "cover" crops to fill (default),
   // "contain" shows the whole cover without cropping.
   fit?: "cover" | "contain";
+  // The cover's own width/height, used when fit is "contain" so the card
+  // takes that exact shape. Write it as the image's pixel size, e.g. "1024/1536".
+  ratio?: string;
 };
 
 // The journals shown as book covers in "The Journals" section, in order.
@@ -39,6 +42,8 @@ export const journals: Journal[] = [
     amazonUrl: "https://www.amazon.ca/Dream-Loud-Vision-Planner-Dreams/dp/B0H8MYJ8ZV",
     cover: dreamLoudCover.url,
     alt: "Dream Loud vision and goal planner journal cover.",
+    fit: "contain",
+    ratio: "1356/1920",
   },
   {
     id: "brave-and-beloved",
@@ -48,6 +53,7 @@ export const journals: Journal[] = [
     cover: braveAndBelovedCover.url,
     alt: "Brave & Beloved faith journal for teen girls cover.",
     fit: "contain",
+    ratio: "1024/1536",
   },
   // Template for a new journal:
   // { id: "new-journal", title: "New Journal", amazonUrl: "https://www.amazon.ca/dp/XXXXXXXXXX", cover: "" },

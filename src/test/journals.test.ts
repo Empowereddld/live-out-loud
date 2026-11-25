@@ -10,8 +10,21 @@ describe("Journal cards", () => {
     expect(book?.cover).toMatch(/brave-and-beloved-journal-cover\.png$/);
     expect(book?.alt).toBe("Brave & Beloved faith journal for teen girls cover.");
     expect(book?.fit).toBe("contain");
+    expect(book?.ratio).toBe("1024/1536");
     expect(book?.amazonUrl).toBe(
       "https://www.amazon.ca/Brave-Beloved-Confidence-Emotional-Scripture/dp/B0H78C69DN",
+    );
+  });
+
+  it("shows the Dream Loud cover whole, with its own alt text and store link", () => {
+    const book = journals.find((j) => j.id === "dream-loud");
+
+    expect(book?.cover).toMatch(/dream-loud-journal-cover\.webp$/);
+    expect(book?.alt).toBe("Dream Loud vision and goal planner journal cover.");
+    expect(book?.fit).toBe("contain");
+    expect(book?.ratio).toBe("1356/1920");
+    expect(book?.amazonUrl).toBe(
+      "https://www.amazon.ca/Dream-Loud-Vision-Planner-Dreams/dp/B0H8MYJ8ZV",
     );
   });
 
