@@ -35,6 +35,8 @@ export const journals: Journal[] = [
     amazonUrl: "https://www.amazon.ca/dp/B0H6T5CLQQ",
     cover: warRoomCover.url,
     alt: "War Room Ready 52-week guided prayer journal cover.",
+    fit: "contain",
+    ratio: "1023/1537",
   },
   {
     id: "dream-loud",

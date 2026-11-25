@@ -28,6 +28,16 @@ describe("Journal cards", () => {
     );
   });
 
+  it("shows the War Room Ready cover whole, with its own alt text and store link", () => {
+    const book = journals.find((j) => j.id === "war-room-ready");
+
+    expect(book?.cover).toMatch(/war-room-ready-journal-cover\.png$/);
+    expect(book?.alt).toBe("War Room Ready 52-week guided prayer journal cover.");
+    expect(book?.fit).toBe("contain");
+    expect(book?.ratio).toBe("1023/1537");
+    expect(book?.amazonUrl).toBe("https://www.amazon.ca/dp/B0H6T5CLQQ");
+  });
+
   it("keeps the Amazon links already published", () => {
     const links = Object.fromEntries(
       journals.map((j) => [j.id, j.amazonUrl]),
