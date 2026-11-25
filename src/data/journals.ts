@@ -36,7 +36,7 @@ export const journals: Journal[] = [
   {
     id: "dream-loud",
     title: "Dream Loud",
-    amazonUrl: "" /* PLACEHOLDER: add Amazon link */,
+    amazonUrl: "https://www.amazon.ca/Dream-Loud-Vision-Planner-Dreams/dp/B0H8MYJ8ZV",
     cover: dreamLoudCover.url,
     alt: "Dream Loud vision and goal planner journal cover.",
   },

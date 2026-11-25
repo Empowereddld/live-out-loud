@@ -22,5 +22,8 @@ describe("Journal cards", () => {
 
     expect(links["speak-life"]).toBe("https://www.amazon.ca/dp/B0H6STHNWP");
     expect(links["war-room-ready"]).toBe("https://www.amazon.ca/dp/B0H6T5CLQQ");
+    expect(links["dream-loud"]).toBe(
+      "https://www.amazon.ca/Dream-Loud-Vision-Planner-Dreams/dp/B0H8MYJ8ZV",
+    );
   });
 });
