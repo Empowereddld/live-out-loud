@@ -1,5 +1,6 @@
 import speakLifeCover from "@/assets/speak-life-journal-cover.png.asset.json";
 import warRoomCover from "@/assets/war-room-ready-journal-cover.png.asset.json";
+import dreamLoudCover from "@/assets/dream-loud-journal-cover.webp.asset.json";
 
 export type Journal = {
   id: string;
@@ -32,7 +33,8 @@ export const journals: Journal[] = [
     id: "dream-loud",
     title: "Dream Loud",
     amazonUrl: "" /* PLACEHOLDER: add Amazon link */,
-    cover: "",
+    cover: dreamLoudCover.url,
+    alt: "Dream Loud vision and goal planner journal cover.",
   },
   {
     id: "brave-and-beloved",
