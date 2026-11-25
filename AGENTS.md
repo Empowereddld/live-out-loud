@@ -31,3 +31,4 @@ use the editor.
 
 - Editable site content lives in src/data/site.ts and src/data/journals.ts; components read from there so content edits never touch UI code.
 - No backend or on-site data forms: sign-ups go to an external newsletter link, purchases to external store links.
+- Journal covers are never cropped: a cover whose shape differs from the card's is marked fit: "contain" in src/data/journals.ts, and the card follows the cover's own ratio at the row's shared height instead of letterboxing it.

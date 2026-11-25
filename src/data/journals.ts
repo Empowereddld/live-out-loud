@@ -1,6 +1,7 @@
 import speakLifeCover from "@/assets/speak-life-journal-cover.png.asset.json";
 import warRoomCover from "@/assets/war-room-ready-journal-cover.png.asset.json";
 import dreamLoudCover from "@/assets/dream-loud-journal-cover.webp.asset.json";
+import braveAndBelovedCover from "@/assets/brave-and-beloved-journal-cover.png.asset.json";
 
 export type Journal = {
   id: string;
@@ -9,6 +10,9 @@ export type Journal = {
   cover: string;
   // Alt text for the cover image; falls back to the title when empty.
   alt?: string;
+  // How the cover fills the card: "cover" crops to fill (default),
+  // "contain" shows the whole cover without cropping.
+  fit?: "cover" | "contain";
 };
 
 // The journals shown as book covers in "The Journals" section, in order.
@@ -40,7 +44,9 @@ export const journals: Journal[] = [
     id: "brave-and-beloved",
     title: "Brave & Beloved",
     amazonUrl: "" /* PLACEHOLDER: add Amazon link */,
-    cover: "",
+    cover: braveAndBelovedCover.url,
+    alt: "Brave & Beloved faith journal for teen girls cover.",
+    fit: "contain",
   },
   // Template for a new journal:
   // { id: "new-journal", title: "New Journal", amazonUrl: "https://www.amazon.ca/dp/XXXXXXXXXX", cover: "" },

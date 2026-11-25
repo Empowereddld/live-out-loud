@@ -63,7 +63,25 @@ const Journals = () => {
                 </span>
               </>
             );
-            const cls = `journal-cover relative flex aspect-[3/4] flex-col justify-between overflow-hidden rounded-l-sm rounded-r-xl p-4 shadow-[0_30px_50px_-30px_rgba(43,58,87,0.6)] sm:p-6 ${covers[i % covers.length]}`;
+            // A cover whose shape differs from the card's keeps its own ratio:
+            // same height as the rest of the row, artwork edge to edge, nothing cropped.
+            const whole = book.fit === "contain";
+            const cls = `journal-cover relative flex ${
+              whole ? "mx-auto h-full w-auto aspect-[2/3]" : "aspect-[3/4]"
+            } flex-col justify-between overflow-hidden rounded-l-sm rounded-r-xl p-4 shadow-[0_30px_50px_-30px_rgba(43,58,87,0.6)] sm:p-6 ${covers[i % covers.length]}`;
+            const card = book.amazonUrl ? (
+              <a
+                href={book.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${book.title} on Amazon`}
+                className={cls}
+              >
+                {inner}
+              </a>
+            ) : (
+              <div className={cls}>{inner}</div>
+            );
             return (
               <motion.li
                 key={book.id}
@@ -74,19 +92,7 @@ const Journals = () => {
                 whileHover={{ y: -10, rotate: i % 2 ? 1.5 : -1.5 }}
                 whileTap={{ y: -6, scale: 0.98, rotate: i % 2 ? 1 : -1 }}
               >
-                {book.amazonUrl ? (
-                  <a
-                    href={book.amazonUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${book.title} on Amazon`}
-                    className={cls}
-                  >
-                    {inner}
-                  </a>
-                ) : (
-                  <div className={cls}>{inner}</div>
-                )}
+                {whole ? <div className="aspect-[3/4]">{card}</div> : card}
               </motion.li>
             );
           })}
